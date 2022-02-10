@@ -1,14 +1,16 @@
-require 'library.txt'
-
 class Game
+  attr_accessor :word  
   def initialize
-    choose_word
+    @word = choose_word
   end
+  
+
 end
 
 def choose_word
-  File.readlines('library.txt').each do |word|
-    puts word if word.length.between?(5, 12)
-  end
+  library = []
+  File.readlines('./lib/library.txt').each { |word| library.push(word.chomp) if word.chomp.length.between?(5, 12) }
+  library.sample
 end
 game = Game.new
+p game.word
