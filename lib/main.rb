@@ -17,7 +17,7 @@ def choose_word
 
   library.sample
 end
-
+private
 def play
   puts "Welcome to the dictionary-dungeon gallows\n\n"
   win = false
