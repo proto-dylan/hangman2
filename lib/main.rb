@@ -11,6 +11,19 @@ class Game
   end
 end
 
+def new_game?
+  while true
+    puts 'Play again? [y/n]: '
+    case gets.strip.downcase
+    when 'y'
+      initialize
+    when 'n'
+      puts 'later taters'
+      break
+    end
+  end
+end
+
 private
 
 def choose_word
@@ -44,7 +57,7 @@ end
 
 def display
   puts "Attempts left: #{@attempts}"
-  puts "Guessed letters: #{@guessed_before.join(" ")}\n\n"
+  puts "Guessed letters: #{@guessed_before.join(' ')}\n\n"
   puts "#{@guesses.join(' ')}\n\n"
 end
 
@@ -53,11 +66,11 @@ def get_guess
   while guess.nil?
     puts 'Enter guess'
     input = gets.chomp
-    if input[/[a-zA-Z]+/] == input && 
-      unless @guessed_before.include?(input) 
-        guess = input.downcase
-        @guessed_before << guess
-      end
+    if input[/[a-zA-Z]+/] == input &&
+       unless @guessed_before.include?(input)
+         guess = input.downcase
+         @guessed_before << guess
+       end
     else
       puts " \n    enter a valid guess   \n"
     end
@@ -68,26 +81,14 @@ end
 def check_guess(guess)
   bad_guess = true
   @word.each_with_index do |char, i|
-    next unless char == guess 
+    next unless char == guess
+
     @guesses[i] = char
-    puts 'noice'
     bad_guess = false
   end
-  if bad_guess == true then @attempts -= 1 end
-  
+  @attempts -= 1 if bad_guess == true
 end
 
-def new_game?
-  while true
-    puts "Play again? [y/n]: "
-    case gets.strip.downcase
-    when 'y'
-      self.initialize
-    when 'n'
-      puts "later taters"
-      break
-    end
-  end
-end
+
 
 game = Game.new
