@@ -6,7 +6,7 @@ class Game
     @attempts = @word.length
     @guesses = Array.new(@attempts, '_')
     @guessed_before = []
-    word_check
+    # word_check
     play
   end
 end
